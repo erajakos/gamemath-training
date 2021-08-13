@@ -15,9 +15,13 @@ public class RadialTrigger : MonoBehaviour
         Vector2 objPos = objTransform.position;
         Vector2 origin = transform.position;
 
-        float distance = Vector2.Distance(objPos, origin);
+        //float distance = Vector2.Distance(objPos, origin);
+        //bool isInside = distance < radius;
 
-        bool isInside = distance < radius;
+        // optimized
+        Vector2 disp = objPos - origin;
+        float distSq = disp.sqrMagnitude; // disp.x * disp.x + disp.y + disp.y;
+        bool isInside = distSq < radius * radius;
 
         Handles.color = isInside ? Color.green : Color.red;
 
